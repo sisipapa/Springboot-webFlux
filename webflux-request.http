@@ -1,0 +1,30 @@
+GET http://localhost:8080
+Accept: text/plain
+
+###
+
+
+GET http://localhost:8080
+Accept: text/event-stream
+
+###
+
+GET http://localhost:8080
+Accept: application/stream+json
+
+###
+
+GET http://localhost:8080/stream
+Accept: application/json
+
+###
+
+GET http://localhost:8080/stream
+Accept: text/event-stream
+
+###
+
+GET http://localhost:8080/stream
+Accept: application/stream+json
+
+###
