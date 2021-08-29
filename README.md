@@ -373,7 +373,7 @@ data:{"double":6}
 Response code: 200 (OK); Time: 63ms; Content length: 57 bytes
 ```  
 Handler의 RequestPredicates.GET RequestPredicates.POST는 Controller의 @GetMapping, @PostMapping에 해당한다.   
-오늘은 [dekuma님의 블로그](http://www.devkuma.com/pages/1514)를 따라해 보면서 Controller와 Handler에서 동일한 예제를 실행해 보면서 webFlux가 이러게 쓰는 거라는 정도만 확인해 보았다. 아직은 webFlux에 대한 학습이 더 필요할 것 같다.  
+오늘은 [dekuma님의 블로그](http://www.devkuma.com/pages/1514)를 따라하면서 Controller와 Handler에서 동일한 예제를 실행해 보았고 webFlux가 이러게 쓰는 거라는 정도만 확인해 보았다. 아직은 webFlux에 대한 학습이 더 필요할 것 같다.  
 
 
 
