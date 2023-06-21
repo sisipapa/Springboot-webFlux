@@ -6,9 +6,13 @@ import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
 
+/**
+ * Backpressure - Publisher로부터 전달받은 데이터를 안정적으로 처리하기 위한 수단
+ */
 @Slf4j
 public class Example8_2 {
 
+    // onBackpressureError
     @Test
     void test1() throws Exception {
         // interval Operator는 0부터 1씩 증가한 숫자를 0.001초에 한번씩 emit
@@ -25,10 +29,49 @@ public class Example8_2 {
                             try{
                                 Thread.sleep(5L);
                             }catch(InterruptedException e){
-                                log.info("# onNExt: {}", data);
                             }
+                            log.info("# onNext: {}", data);
                         },
-                        error -> log.error("# onError"));
+                        error -> log.error("# onError : {}", error));
+
+        Thread.sleep(2000L);
+    }
+
+    // onBackpressureDrop
+    @Test
+    void test2() throws Exception {
+        Flux
+                .interval(Duration.ofMillis(1L))
+                .onBackpressureDrop(dropped -> log.info("# dropped : {}", dropped))
+                .doOnNext(data -> log.info("# doOnNext: {}", data))
+                .publishOn(Schedulers.parallel())
+                .subscribe(data -> {
+                            try{
+                                Thread.sleep(5L);
+                            }catch(InterruptedException e){
+                            }
+                            log.info("# onNext: {}", data);
+                        },
+                        error -> log.error("# onError : {}", error));
+
+        Thread.sleep(2000L);
+    }
+
+    // onBackpressureLatest
+    @Test
+    void test3() throws Exception {
+        Flux
+                .interval(Duration.ofMillis(1L))
+                .onBackpressureLatest()
+                .publishOn(Schedulers.parallel())
+                .subscribe(data -> {
+                            try{
+                                Thread.sleep(5L);
+                            }catch(InterruptedException e){
+                            }
+                            log.info("# onNext: {}", data);
+                        },
+                        error -> log.error("# onError : {}", error));
 
         Thread.sleep(2000L);
     }
